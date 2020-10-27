@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPLOYEES } from '../../services/employees';
+import { Employee } from 'src/app/interfaces/employee';
 import {EmployeeService} from '../../services/employee.service';
 
 @Component({
@@ -9,15 +9,48 @@ import {EmployeeService} from '../../services/employee.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  public allEmployees = EMPLOYEES;
+  public displayEmployees: Employee[];  
 
   constructor(private __empService: EmployeeService) {
-    this.__empService.getAllEmployees();
+    
   }
 
   ngOnInit(): void {
+    this.displayEmployees = this.__empService.getAllEmployees();
+
+  }
+
+  // sorting function.
+  // type: string (name of the propety to be sorted with ('name' || 'exp_years'))
+  // direction: number (ascending (1) || descending (0))
+  sortEmp(type, direction) {          
+    if(direction) {
+      this.displayEmployees.sort(function(a, b) {
+        if(a[type] < b[type]) { return -1; }
+        if(a[type] > b[type]) { return 1; }
+        return 0;
+      })
+    } else {
+      this.displayEmployees.sort(function(a, b) {
+        if(a[type] > b[type]) { return -1; }
+        if(a[type] < b[type]) { return 1; }
+        return 0;
+      })
+    }
+
+  }
+
+  removeEmp(dept) {
+    this.displayEmployees = this.displayEmployees.filter(emp => emp.department !== dept);
   }
 
 
+  filterExp(num) {
+    this.displayEmployees = this.displayEmployees.filter(emp => emp.exp_years > num);
+  }
+
+  resetArr() {
+    this.displayEmployees = this.__empService.getAllEmployees();
+  }
 
 }
