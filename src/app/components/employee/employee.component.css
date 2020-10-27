@@ -1,0 +1,13 @@
+.main--table {
+    width: 75%;
+    margin: auto;
+}
+
+.sortable--head {
+    display: flex;
+}
+
+.sort--icons {
+    display: flex;
+    cursor: pointer;
+}
