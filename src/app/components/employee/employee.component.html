@@ -1,16 +1,23 @@
+<section class="title--section" >
+  <h3 class="title" >All Employees</h3>
+</section>
+
 <section class="main--table">
     <section class="table-fns" >
-        <div class="row fns--row">
-            <div class="form-inline">
-                Name Search: <input class="form-control ml-2" type="text" />
-            </div>            
-            <button type="button" class="btn btn-dark" (click)="filterExp(2)" >Display Experienced</button>
-            <button type="button" class="btn btn-info">Get Counts</button>
-            <button type="button" class="btn btn-danger" (click)="removeEmp('Development')" >Remove Devs</button>
-            <button type="button" class="btn btn-success" (click)="resetArr()" >Reset</button>
-        </div>
+        <div class="row fns--row">                      
+          <div class="form-inline search--fns">
+            Name Search: <input class="form-control ml-2" type="text" />
+          </div>
+          <div class="btn--row" >
+            <button type="button" class="btn btn-dark fns" (click)="filterExp(2)" >Display Experienced</button>
+            <button type="button" class="btn btn-info fns">Get Counts</button>
+            <button type="button" class="btn btn-danger fns" (click)="removeEmp('Development')" >Remove Devs</button>
+            <button type="button" class="btn btn-success fns" (click)="resetArr()" >Reset</button>
+          </div>
+          
+        </div>          
       </section>
-    <table class="table table-striped">
+    <table class="table table-striped table--height">
         <thead>
         <tr>
           <th scope="col">
@@ -41,12 +48,12 @@
               <div class="sortable--head">
                 Joining Date
                 <div class="sort--icons">
-                    <div class="sort--up" (click)="sortEmp('exp_years', 1)">
+                    <div class="sort--up" (click)="sortEmp('totalExp', 1)">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
                         </svg>
                     </div>
-                    <div class="sort--down" (click)="sortEmp('exp_years', 0)">   
+                    <div class="sort--down" (click)="sortEmp('totalExp', 0)">   
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
                         </svg>
@@ -56,7 +63,7 @@
               </div>
                             
           </th>
-          <th scope="col">View Details</th>
+          <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
@@ -66,7 +73,7 @@
             {{ employee.name }}
           </td>
           <td>{{ employee.department }}</td>
-          <td>{{ employee.joining_date}}</td>
+          <td>{{ employee.joining_date | date}}</td>
           <td>
             <button type="button" class="btn btn-primary">View</button>
           </td>
