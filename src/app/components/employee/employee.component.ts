@@ -42,9 +42,11 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // sorting function.
-  // type: string (name of the propety to be sorted with ('name' || 'exp_years'))
-  // direction: number (ascending (1) || descending (0))
+  /**
+   * sorting function.
+   * @param type : number
+   * @param direction : string
+   */
   sortEmp(type, direction) {          
     if(direction) {
       this.displayEmployees.sort(function(a, b) {
@@ -62,21 +64,30 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-  // removes employees from the specified department ('Development')
-  // dept: String
+  /**
+   * removes employees from the specified department ('Development')
+   * @param dept : string
+   */
   removeEmp(dept) {
     this.displayEmployees = this.displayEmployees.filter(emp => emp.department !== dept);
   }
 
 
-  // uses filter function to check the years of experience of employees 
-  // against the given value (2)
-  // num : number
+  /**
+   * uses filter function to check the years of experience of employees 
+      against the given value (2)
+      num : number     
+  */
   filterExp(num) {
     this.displayEmployees = this.displayEmployees.filter(emp => emp.exp_years > num);
     this.expFilterFlag = true;
   }
 
+  /**
+   * Calculate the number of employees in each department
+   * Current method populates the array with different departments and employees within each
+   * from the INITIAL data and not the filtered/displayed data.
+   */
   getSummary() {    
     this.displayEmployees.forEach(emp => {
       let dept_found = false
