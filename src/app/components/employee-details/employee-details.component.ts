@@ -15,6 +15,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router : Router,
     private __empService: EmployeeService
     ) { }
 
@@ -26,8 +27,8 @@ export class EmployeeDetailsComponent implements OnInit {
   getDetails() {
     this.employeeDetails = this.__empService.getSingleEmployee(this.employeeId);    
     if(!this.employeeDetails) {
-      // redirect to error component
-      console.log('not found');
+      // redirect to error component      
+      this.router.navigate(['/not-found']) 
     }
   }
 

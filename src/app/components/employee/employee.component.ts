@@ -17,6 +17,7 @@ export class EmployeeComponent implements OnInit {
   public initialData: Employee[];  // to store unfilered data for quick reset
   public searchTerm = '';
   public summaryArr: Summary[] = []; // to store the departments and number of employees in each
+  public expFilterFlag = false;
   
 
   constructor(private __empService: EmployeeService,
@@ -73,6 +74,7 @@ export class EmployeeComponent implements OnInit {
   // num : number
   filterExp(num) {
     this.displayEmployees = this.displayEmployees.filter(emp => emp.exp_years > num);
+    this.expFilterFlag = true;
   }
 
   getSummary() {    
@@ -102,6 +104,7 @@ export class EmployeeComponent implements OnInit {
   resetArr() {
     this.displayEmployees = this.initialData.map(emp => emp);
     this.searchTerm = '';
+    this.expFilterFlag = false;
   }
 
 }
