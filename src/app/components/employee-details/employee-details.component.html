@@ -1,1 +1,15 @@
-<p>employee-details works!</p>
+<section class="details" >
+    <h3 >Employee Details</h3>
+    <ng-template [ngIf]="employeeDetails" >
+        <div class="employee--details">
+            <div class="emp--key"><b>Name : </b> {{ employeeDetails.name }} </div>
+            <div class="emp--key"><b>Department : </b> {{ employeeDetails.department }} </div>
+            <div class="emp--key"><b>Joining Date : </b> {{ employeeDetails.joining_date | date }} </div>
+            <div class="emp--key"><b>Employee ID : </b> {{ employeeDetails.id }} </div>            
+        </div>        
+    </ng-template>
+    <br>
+    <a routerLink="/all-employees">
+        <button class="btn btn-primary" >Go back</button>
+    </a>
+</section>

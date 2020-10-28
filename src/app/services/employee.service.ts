@@ -15,7 +15,7 @@ export class EmployeeService {
             let yrs = differenceInYears(new Date(), new Date(formattedJoining))
             let totalExp = differenceInDays(new Date(), new Date(formattedJoining))
             return {
-                ...emp,
+                ...emp,                
                 totalExp,
                 exp_years : yrs,
                 joining_date : formattedJoining
@@ -26,6 +26,15 @@ export class EmployeeService {
 
     getAllEmployees() {     
         return this.allEmployees;   
+    }
+
+    getSingleEmployee(id) {        
+        if(this.allEmployees.filter(emp => emp.id === id).length > 0) {            
+            return this.allEmployees.filter(emp => emp.id === id)[0]
+        } else {
+            return null
+        }
+        
     }
 
     formatDate(dt) {

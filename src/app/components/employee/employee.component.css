@@ -1,12 +1,8 @@
-.title--section {
-    width: 75%;
-    margin: auto;
+/* .title--section {    
     padding: 20px 0px 0px;
-}
+} */
 
-.main--table {
-    width: 75%;
-    margin: auto;
+.main--table {    
     padding: 20px 0px;
 }
 
@@ -28,14 +24,20 @@
     display: flex;    
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 10px;
+    padding: 0px 20px;
 }
 
 .search--fns {
     margin: 10px 10px;
 }
 
+/* .input-group {
+    padding: 0px;
+} */
+
 .btn--row {
-    margin-left: 10px 10px;
+    margin: 10px 0px;
 }
 
 .fns:not(:first-of-type) {

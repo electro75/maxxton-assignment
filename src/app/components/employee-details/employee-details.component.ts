@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Employee } from 'src/app/interfaces/employee';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-employee-details',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  constructor() { }
+  public employeeId;
+  public employeeDetails: Employee;
+
+  constructor(
+    private route: ActivatedRoute,
+    private __empService: EmployeeService
+    ) { }
 
   ngOnInit(): void {
+    this.employeeId = +this.route.snapshot.paramMap.get('id');
+    this.getDetails()
+  }
+
+  getDetails() {
+    this.employeeDetails = this.__empService.getSingleEmployee(this.employeeId);    
+    if(!this.employeeDetails) {
+      // redirect to error component
+      console.log('not found');
+    }
   }
 
 }

@@ -5,16 +5,20 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeService } from './services/employee.service';
-import { HeaderComponent } from './components/header/header.component';
+import { AppRoutingModule } from './app-routing.module';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
-    HeaderComponent
+    EmployeeDetailsComponent
   ],
   imports: [
+    FormsModule,    
     BrowserModule,
+    AppRoutingModule,
     NgbModule
   ],
   providers: [EmployeeService],

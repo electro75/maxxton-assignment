@@ -9,7 +9,9 @@ import {EmployeeService} from '../../services/employee.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  public displayEmployees: Employee[];  
+  public displayEmployees: Employee[];
+  public initialData: Employee[];  // to store unfilered data for quick reset
+  public searchTerm = '';
 
   constructor(private __empService: EmployeeService) {
     
@@ -17,7 +19,18 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayEmployees = this.__empService.getAllEmployees();
+    this.initialData = this.displayEmployees.map(emp => emp);
 
+  }
+
+  searchfns() {        
+    if(this.searchTerm.length > 0) {
+      this.displayEmployees = this.displayEmployees.filter(emp => {
+        return emp.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      })
+    } else {
+      this.displayEmployees = this.initialData.map( emp => emp);
+    }
   }
 
   // sorting function.
@@ -50,7 +63,8 @@ export class EmployeeComponent implements OnInit {
   }
 
   resetArr() {
-    this.displayEmployees = this.__empService.getAllEmployees();
+    this.displayEmployees = this.initialData.map(emp => emp);
+    this.searchTerm = '';
   }
 
 }

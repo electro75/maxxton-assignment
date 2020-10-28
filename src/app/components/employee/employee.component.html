@@ -4,11 +4,18 @@
 
 <section class="main--table">
     <section class="table-fns" >
-        <div class="row fns--row">                      
-          <div class="form-inline search--fns">
-            Name Search: <input class="form-control ml-2" type="text" />
+        <div class="row fns--row">          
+          <div class="input-group col-sm-12 col-lg-4">            
+            <input class="form-control" 
+                    placeholder="Search Employee Name..." 
+                    [(ngModel)]="searchTerm"
+                    (keyup)="searchfns()"
+                    type="text" />
+            <!-- <div class="input-group-append">
+              <button (click)="searchfns()" (keyup.enter)="searchfns()"  class="btn btn-outline-secondary" type="button" id="button-addon2">Enter</button>
+            </div> -->
           </div>
-          <div class="btn--row" >
+          <div class="row btn--row">
             <button type="button" class="btn btn-dark fns" (click)="filterExp(2)" >Display Experienced</button>
             <button type="button" class="btn btn-info fns">Get Counts</button>
             <button type="button" class="btn btn-danger fns" (click)="removeEmp('Development')" >Remove Devs</button>
@@ -67,20 +74,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let employee of displayEmployees">
-          <th scope="row">{{ employee.id }}</th>
-          <td>        
-            {{ employee.name }}
-          </td>
-          <td>{{ employee.department }}</td>
-          <td>{{ employee.joining_date | date}}</td>
-          <td>
-            <button type="button" class="btn btn-primary">View</button>
-          </td>
-        </tr>
+          <ng-template [ngIf]="displayEmployees.length >0" >
+            <tr *ngFor="let employee of displayEmployees">
+              <th scope="row">{{ employee.id }}</th>
+              <td>        
+                {{ employee.name }}
+              </td>
+              <td>{{ employee.department }}</td>
+              <td>{{ employee.joining_date | date}}</td>
+              <td>
+                <a [routerLink]="['/employee', employee.id]">
+                  <button type="button" class="btn btn-primary">View</button>
+                </a>            
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template [ngIf]="!displayEmployees.length" >
+            No Results Found!
+          </ng-template>
         </tbody>
-      </table>
-
-      
+      </table>      
 </section>
 
