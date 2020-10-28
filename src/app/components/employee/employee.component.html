@@ -5,13 +5,12 @@
 <section class="main--table">
     <section class="table-fns" >
         <div class="row fns--row">          
-          <div class="input-group col-sm-12 col-lg-4">            
-            <input class="form-control" 
-                    placeholder="Search Employee Name..." 
-                    [(ngModel)]="searchTerm"
-                    (keyup)="searchfns()"
-                    type="text" />
-
+          <div class="input-group col-sm-12 col-lg-4">              
+              <input class="form-control" 
+                    placeholder="Search Employee Name..."
+                    [formControl]="searchTerm"
+                    type="text" />            
+            
             <!-- 
               * the below commented code is for trigerring the search manually ie through a button.
              -->
@@ -19,7 +18,7 @@
               <button (click)="searchfns()" (keyup.enter)="searchfns()"  class="btn btn-outline-secondary" type="button" id="button-addon2">Enter</button>
             </div> -->
           </div>
-          <div class="row btn--row">
+          <div class="btn--row col-sm-10 col-lg-8">
             <button type="button" 
                     class="btn btn-dark fns" 
                     (click)="filterExp(2)" 

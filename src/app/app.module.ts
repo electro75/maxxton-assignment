@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,7 +24,8 @@ import { EmployeeService } from './services/employee.service';
     NotFoundComponent
   ],
   imports: [
-    FormsModule,    
+    FormsModule,   
+    ReactiveFormsModule, 
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
     BrowserModule,

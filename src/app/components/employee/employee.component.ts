@@ -3,6 +3,7 @@ import { Employee } from '../../interfaces/employee';
 import { Summary } from '../../interfaces/summary';
 import {EmployeeService} from '../../services/employee.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-employee',
@@ -15,14 +16,16 @@ export class EmployeeComponent implements OnInit {
 
   public displayEmployees: Employee[];
   public initialData: Employee[];  // to store unfilered data for quick reset
-  public searchTerm = '';
+  public searchTerm : FormControl = new FormControl('');
   public summaryArr: Summary[] = []; // to store the departments and number of employees in each
   public expFilterFlag = false;
   
 
   constructor(private __empService: EmployeeService,
               private __modal : NgbModal) {
-    
+    this.searchTerm.valueChanges.subscribe(res => {      
+      this.searchfns();
+    })
   }
 
   ngOnInit(): void {
@@ -33,13 +36,13 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchfns() {        
-    if(this.searchTerm.length > 0) {
-      this.displayEmployees = this.displayEmployees.filter(emp => {
-        return emp.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+    // if(this.searchTerm.value.length > 0) {
+      this.displayEmployees = this.initialData.filter(emp => {
+        return emp.name.toLowerCase().includes(this.searchTerm.value.toLowerCase());
       })
-    } else {
-      this.displayEmployees = this.initialData.map( emp => emp);
-    }
+    // } else {
+    //   this.displayEmployees = this.initialData.map( emp => emp);
+    // }
   }
 
   /**
@@ -107,6 +110,7 @@ export class EmployeeComponent implements OnInit {
     })    
   }
 
+  // display the employee summary in a modal
   displaySummary() {
     this.__modal.open(this.summaryModal).result.then(() =>{}, ()=> {});
   }
@@ -114,7 +118,7 @@ export class EmployeeComponent implements OnInit {
   // simple reset function to revert to initial data after filters are applied.
   resetArr() {
     this.displayEmployees = this.initialData.map(emp => emp);
-    this.searchTerm = '';
+    this.searchTerm.setValue('');
     this.expFilterFlag = false;
   }
 
