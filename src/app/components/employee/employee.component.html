@@ -11,15 +11,31 @@
                     [(ngModel)]="searchTerm"
                     (keyup)="searchfns()"
                     type="text" />
+
+            <!-- 
+              * the below commented code is for trigerring the search manually ie through a button.
+             -->
             <!-- <div class="input-group-append">
               <button (click)="searchfns()" (keyup.enter)="searchfns()"  class="btn btn-outline-secondary" type="button" id="button-addon2">Enter</button>
             </div> -->
           </div>
           <div class="row btn--row">
-            <button type="button" class="btn btn-dark fns" (click)="filterExp(2)" >Display Experienced</button>
-            <button type="button" class="btn btn-info fns">Get Counts</button>
-            <button type="button" class="btn btn-danger fns" (click)="removeEmp('Development')" >Remove Devs</button>
-            <button type="button" class="btn btn-success fns" (click)="resetArr()" >Reset</button>
+            <button type="button" 
+                    class="btn btn-dark fns" 
+                    (click)="filterExp(2)" 
+                    ngbTooltip="Show only employees with experience above 2 years">Display Experienced</button>
+            <button type="button" 
+                    class="btn btn-info fns"
+                    (click)="displaySummary()"
+                    ngbTooltip="Get a list of all departments and the employees within each" >Get Summary</button>
+            <button type="button" 
+                    class="btn btn-danger fns" 
+                    (click)="removeEmp('Development')"
+                    ngbTooltip="Remove all employees from 'Development' department" >Remove Devs</button>
+            <button type="button" 
+                    class="btn btn-success fns" 
+                    (click)="resetArr()"
+                    ngbTooltip="Get the original list of employees" >Reset</button>
           </div>
           
         </div>          
@@ -96,3 +112,34 @@
       </table>      
 </section>
 
+
+<!-- Employee summary Modal-->
+<ng-template #summaryContent let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Employee Summary</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Departments</th>
+          <th> No. of Employees </th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr *ngFor="let summaryObj of summaryArr" >
+            <td> {{ summaryObj.dept }} </td>
+            <td> {{ summaryObj.num_emp }} </td>
+          </tr>
+        
+      </tbody>
+    </table>  
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
