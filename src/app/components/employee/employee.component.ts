@@ -23,6 +23,8 @@ export class EmployeeComponent implements OnInit {
 
   constructor(private __empService: EmployeeService,
               private __modal : NgbModal) {
+
+    // subscription to monitor the changes in searchTerm and call searchfns accordingly.
     this.searchTerm.valueChanges.subscribe(res => {      
       this.searchfns();
     })
@@ -35,14 +37,14 @@ export class EmployeeComponent implements OnInit {
     this.getSummary();
   }
 
-  searchfns() {        
-    // if(this.searchTerm.value.length > 0) {
+  /**
+   * called when the value of searchTerm changes.
+   * uses current value of searchTerm to filter through the original data.
+   */
+  searchfns() {    
       this.displayEmployees = this.initialData.filter(emp => {
         return emp.name.toLowerCase().includes(this.searchTerm.value.toLowerCase());
-      })
-    // } else {
-    //   this.displayEmployees = this.initialData.map( emp => emp);
-    // }
+      })    
   }
 
   /**
